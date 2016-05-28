@@ -1,14 +1,43 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @article.title %>
-</p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @article.body %>
-</p>
-
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to 'Back', articles_path %>
+<div class="container">
+  <div class="row">
+	  <div class="col-sm-12">
+	      <div class="card">
+	        <div class="card-block">
+	          <h4 class="card-title"><%= @article.title %></h4>
+	          <p class="card-text"><%= @markdown.render(@article.body).html_safe %></p>
+	        </div>
+	        <div class="card-footer">
+	          <%= link_to 'Edit', edit_article_path(@article), class: 'btn btn-warning' %>
+						<%= link_to 'Back', articles_path, class: "btn btn-secondary" %>
+						<p class="pull-xs-right"><%= "#{@article.views} Views" if @article.views %></p>
+	        </div>
+	      </div>
+	  </div>
+	</div>
+	<%= form_for(@comment) do |f| %>
+		<%= f.hidden_field :article_id, value: @article.id %>
+	  <div class="form-group row">
+	    <div class="col-sm-12">
+	    	<%= f.text_area :content, class: "form-control", placeholder: "Your comment" %>
+	    </div>
+	  </div>
+	  <div class="form-group row">
+	    <div class="col-sm-12">
+	    	<%= f.submit class: "btn btn-secondary" %>
+	    </div>
+	  </div>
+	<% end %>
+	<div class="row">
+		<% @article.comments.order("id desc").each do |comment| %>
+	  <div class="col-sm-12">
+	      <div class="card">
+	        <div class="card-block">
+	          <p class="card-title"><%= comment.created_at %></p>
+	          <p class="card-text"><%= comment.content %></p>
+	        </div>
+	      </div>
+	  </div>
+	  <% end %>
+	</div>
+</div>
