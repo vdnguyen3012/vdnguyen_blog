@@ -12,7 +12,7 @@ class ArticlesController < ApplicationController
   # GET /articles/1.json
   def show
     @comment = Comment.new
-    @article.update(views: @article.views + 1)
+    @article.update(views: @article.views.to_i + 1)
     @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
   end
 
