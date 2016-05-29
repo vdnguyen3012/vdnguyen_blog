@@ -9,7 +9,7 @@ VD's Blog is a Ruby on Rails blog application.
 
 Submitted by: vdnguyen3012
 
-Time spent: 4 hours spent in total
+Time spent: 12 hours spent in total
 
 URL: https://sheltered-headland-30198.herokuapp.com/articles
 
